@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserServiceimplementation implements UserService{
 
+	
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final RoleRepository roleRepository;
@@ -33,14 +34,10 @@ public class UserServiceimplementation implements UserService{
       user.setRoles(Collections.singletonList(userRole));
       return userRepository.save(user);
 	}
-
-	
-	
 	@Override
 	public List<User> getUsers() {
 		return userRepository.findAll();
 	}
-
 	@Transactional
 	@Override
 	public void deleteUsers(String email) {
@@ -51,7 +48,6 @@ public class UserServiceimplementation implements UserService{
 		}
 		
 	}
-
 	@Override
 	public User getuser(String email) {
 		return userRepository.findByEmail(email).orElseThrow(()->new UserNotFoundException("user not found "+email));
