@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 @RequiredArgsConstructor
@@ -100,6 +101,12 @@ public class RoomServiceImplementation  implements RoomService{
 	public Optional<Room> getRoomById(Long roomId) {
 		// TODO Auto-generated m
 		return Optional.of(roomRepository.findById(roomId).get());
+	}
+
+	@Override
+	public List<Room> getAvialbleRoom(LocalDate checkInDate, LocalDate checkOutDate, String roomType) {
+		
+	return roomRepository.findAvailableRoomsByDateAndType(checkInDate,checkOutDate,roomType);
 	}
 
 

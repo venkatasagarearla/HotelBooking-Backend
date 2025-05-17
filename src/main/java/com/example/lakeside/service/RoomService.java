@@ -3,6 +3,7 @@ package com.example.lakeside.service;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,8 @@ public interface RoomService {
 	Room updateRoom(Long roomId, String roomType, BigDecimal roomPrice, byte[] photoBytes);
 
 	Optional<Room> getRoomById(Long roomId);
+
+	List<Room> getAvialbleRoom(LocalDate checkInDate, LocalDate checkOutDate, String roomType);
 
 
 

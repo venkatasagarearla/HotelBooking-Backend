@@ -47,13 +47,10 @@ public class BookingController {
 		 }
 		return ResponseEntity.ok(bookingResponse);
 	}
-	
-	
-
-	@GetMapping("/confirmation/{confirmationCode}")
-	public ResponseEntity<?> getBookingByConfirmationCode(@PathVariable String confirmationcode ){
+	@GetMapping("/confirmation/{bookingConfirmationCode}")
+	public ResponseEntity<?> getBookingByConfirmationCode(@PathVariable String bookingConfirmationCode ){
 		try {
-			 BookedRoom booking=bookingService.findByBookingConfirmationCode(confirmationcode);
+			BookedRoom booking=bookingService.findByBookingConfirmationCode(bookingConfirmationCode);
 			 
 			 BookingResponse bookingResponse=getBookingResponse(booking);
 			 return ResponseEntity.ok(bookingResponse);
@@ -66,9 +63,16 @@ public class BookingController {
 	public ResponseEntity<?> saveBooking(@PathVariable Long id,@RequestBody BookedRoom bookingRequest){
 		 try {
 			 String confirmationCode=bookingService.saveBooking(id,bookingRequest);
+			 System.out.println("guest full name is"+bookingRequest.getGuestFullName());
+			System.out.println("Hollo");
+//			 System.out.println(bookingRequest.getNumOfAdults());
+//			 System.out.println(bookingRequest.getNumOfChildren());
+//			 System.out.println(bookingRequest.getGuestEmail());
+//			 System.out.println(bookingRequest.getGuestEmail());
 			 return ResponseEntity.ok(
 					 "Room booked sucessfully,your booking conformation code is:"+confirmationCode);
 		 }catch(InvalidBookingRequestException e) {
+			 System.out.println("booking failed");
 			 return ResponseEntity.badRequest().body(e.getMessage());
 			 
 		 }
@@ -89,8 +93,8 @@ public class BookingController {
 				booking.getGuestFullName(),
 				booking.getGuestEmail(),
 				booking.getNumOfChildren(),
-				booking.getNumofAdults(),
-				booking.getTotalNumofGuest(),
+				booking.getNumOfAdults(),
+				booking.getTotalNumOfGuest(),
 				booking.getBookingConfirmationCode(),room);
 	}
 	

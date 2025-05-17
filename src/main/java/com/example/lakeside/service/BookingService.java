@@ -22,7 +22,7 @@ public interface BookingService {
 	List<BookedRoom> getAllBookingsByRoomId(Long roomId);
 
 
-	BookedRoom findByBookingConfirmationCode(String confirmationcode);
+	BookedRoom findByBookingConfirmationCode(String bookingConfirmationCode);
 
 
 	
